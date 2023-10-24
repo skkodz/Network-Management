@@ -1,0 +1,39 @@
+#!/bin/bash
+
+# Script to test if an IP address is down, i.e. does not respond
+# to an ICMP echo packet. This is useful when rebooting a remote
+# system as you will receive 2 beeps when the ICMP echo packets 
+# stop replying.
+# Required parameter is the target ip address.
+
+# Version 1.1 - 17 March 2022
+
+RED='\033[0,31m'
+NC='\033[0m'
+
+if [ "$#" -ne 1 ]; then
+   echo -e "${RED}Error${NC} You must enter a valid IP address."
+   exit 1
+fi
+
+ip=${1:-1.2.3.4}
+up=0
+
+if expr "$ip" : '[0-9][0-9]*\.[0-9][0-9]*\.[0-9][0-9]*\.[0-9][0-9]*$' >/dev/null; then
+   for i in 1 2 3 4; do
+     if [ $(echo "$ip" | cut -d. -f$i) -gt 255 ]; then
+       echo -e "${RED}Error${NC}: $ip is not a valid IP address."
+       exit 1
+     fi
+   done
+   echo -e "Testing IP Address $ip."
+   until [ $up -ne 0 ]; do
+     ping -c 1 $ip >/dev/null
+     up=$?
+   done
+   echo -e "IP Address $ip is down. \a"; sleep 1; echo -e "\a"
+   exit 0
+else
+   echo -e "${RED}Error${NC}: $ip is not a valid IP address."
+   exit 1
+fi
