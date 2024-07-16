@@ -1,6 +1,9 @@
 # Network-Management
 Some basic scripts written to perform useful functions when managing a computer network or environment.
 
+## Get-ADUserReport.ps1
+Creates a CSV export from your local active directory that can be imported into Excel. Useful for getting a quick overview of user account information for your entire domain.
+
 ## Get-EC2Report.ps1
 Uses [AWS Tools for PowerShell](https://aws.amazon.com/powershell/) to enumerate all EC2 instances across all AWS regions. Generates a text file report containing the *Instance ID*, *Name*, *Availability Zone*, *Status* and *Instance Type*.  Automatically creates a time stamped text file report in the directory ~\Documents.
 
