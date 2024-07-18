@@ -7,6 +7,9 @@ Creates a CSV export from your local active directory that can be imported into 
 ## Get-EC2Report.ps1
 Uses [AWS Tools for PowerShell](https://aws.amazon.com/powershell/) to enumerate all EC2 instances across all AWS regions. Generates a text file report containing the *Instance ID*, *Name*, *Availability Zone*, *Status* and *Instance Type*.  Automatically creates a time stamped text file report in the directory ~\Documents.
 
+## Get-LAPSStatus.ps1
+A simple script to report on all computers within the local AD domain, returning a table showing whether Windows LAPS is enabled or not.
+
 ## Get-TreeSize.ps1
 Basic PowerShell script to display the size of a directory tree in GB. Accepts the optional parameter *-path*, otherwise defaults to the current directory.
 
