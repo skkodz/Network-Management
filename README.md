@@ -27,3 +27,6 @@ test-down and test-up can be used to check that a device reboots. By running in 
 test-down 192.168.0.1 && test-up 192.168.0.1
 ```
 You should hear two bells to confirm the device has gone down and two more when it comes back up again. Useful to run in a shell that you do not need to visually monitor, but still know once the device has rebooted.
+
+## uploaad-check.sh
+A basic script that checks the local log file to see if any data has been written to the SFTP server. It is designed to be launched from cron and run every ten minutes, but can be varied to sure requirements. Running via cron means that an email message will be generated with the output, rather than printing onto the terminal. It may be possible to modify the script to suit your preferred messaging tool.
