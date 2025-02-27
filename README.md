@@ -13,6 +13,9 @@ A simple script to report on all computers within the local AD domain, returning
 ## Get-TreeSize.ps1
 Basic PowerShell script to display the size of a directory tree in GB. Accepts the optional parameter *-path*, otherwise defaults to the current directory.
 
+## squid-report.sh
+Basic shell script to report on destination and data quantity from the squid log file. This is assuming that a modified logging format is in place and that you only require data from the previus day. This is aiming to be a daily report that could be scheduled.
+
 ## test-down
 Basic shell script that will notify on screen (and sound the default bell) when a given IP address stops responding to ICMP traffic (ping). Expects a valid IP address as the only mandatory parameter, othrewise throws an error.
 
