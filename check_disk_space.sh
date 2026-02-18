@@ -1,4 +1,5 @@
 #!/bin/bash
+# Version: 20260218
 # Script to check and alert on disk space usage, if it goes above a threshold.
 # The threshold defaults to 90% and will output a warning if the disk space is
 # greater or equal to the threshold, unless it was previously recorded (in the
