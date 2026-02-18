@@ -13,6 +13,11 @@ A simple script to report on all computers within the local AD domain, returning
 ## Get-TreeSize.ps1
 Basic PowerShell script to display the size of a directory tree in GB. Accepts the optional parameter *-path*, otherwise defaults to the current directory.
 
+## check_disk_space.sh
+Script to check and alert on disk space usage, if it goes above a threshold. The threshold defaults to 90% and will output a warning if the disk space is # greater or equal to the threshold, unless it was previously recorded (in the STATE_FILE) as that value, of the figure drops below the threshoold when previously above it (recovery). Ideal for using in a cron job, e.g. to run every 5 minutes:
+
+    */5 * * * * /usr/local/bin/check_disk_space.sh
+
 ## squid-report.sh
 Basic shell script to report on destination and data quantity from the squid log file. This is assuming that a modified logging format is in place and that you only require data from the previus day. This is aiming to be a daily report that could be scheduled.
 
