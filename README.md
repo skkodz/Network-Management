@@ -13,6 +13,9 @@ A simple script to report on all computers within the local AD domain, returning
 ## Get-TreeSize.ps1
 Basic PowerShell script to display the size of a directory tree in GB. Accepts the optional parameter *-path*, otherwise defaults to the current directory.
 
+## ManageLogging.ps1
+Script to get and set the logging parameters from vSphere servers within a cluster. Requires PowerCLI to run.
+
 ## check_disk_space.sh
 Script to check and alert on disk space usage, if it goes above a threshold. The threshold defaults to 90% and will output a warning if the disk space is # greater or equal to the threshold, unless it was previously recorded (in the STATE_FILE) as that value, of the figure drops below the threshoold when previously above it (recovery). Ideal for using in a cron job, e.g. to run every 5 minutes:
 
