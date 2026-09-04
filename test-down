@@ -1,39 +1,49 @@
 #!/bin/bash
 
-# Script to test if an IP address is down, i.e. does not respond
-# to an ICMP echo packet. This is useful when rebooting a remote
-# system as you will receive 2 beeps when the ICMP echo packets 
+# Script to test if an IP address, hostname, or FQDN is down, i.e. does
+# not respond to an ICMP echo packet. This is useful when rebooting a remote
+# system as you will receive 2 beeps when the ICMP echo packets
 # stop replying.
-# Required parameter is the target ip address.
+# Required parameter is the target IP address, hostname, or FQDN.
 
-# Version 1.1 - 17 March 2022
+# Version 1.2 - 04 September 2026
 
 RED='\033[0,31m'
 NC='\033[0m'
 
 if [ "$#" -ne 1 ]; then
-   echo -e "${RED}Error${NC} You must enter a valid IP address."
+   echo -e "${RED}Error${NC}: You must enter a valid IP address, hostname, or FQDN."
    exit 1
 fi
 
-ip=${1:-1.2.3.4}
+target=$1
 up=0
 
-if expr "$ip" : '[0-9][0-9]*\.[0-9][0-9]*\.[0-9][0-9]*\.[0-9][0-9]*$' >/dev/null; then
+if expr "$target" : '[0-9][0-9]*\.[0-9][0-9]*\.[0-9][0-9]*\.[0-9][0-9]*$' >/dev/null; then
+   # Validate each octet of the IPv4 address
    for i in 1 2 3 4; do
-     if [ $(echo "$ip" | cut -d. -f$i) -gt 255 ]; then
-       echo -e "${RED}Error${NC}: $ip is not a valid IP address."
+     if [ $(echo "$target" | cut -d. -f$i) -gt 255 ]; then
+       echo -e "${RED}Error${NC}: $target is not a valid IP address."
        exit 1
      fi
    done
-   echo -e "Testing IP Address $ip."
-   until [ $up -ne 0 ]; do
-     ping -c 1 $ip >/dev/null
-     up=$?
-   done
-   echo -e "IP Address $ip is down. \a"; sleep 1; echo -e "\a"
-   exit 0
+   label="IP Address $target"
+elif expr "$target" : '[a-zA-Z0-9][a-zA-Z0-9._-]*$' >/dev/null; then
+   # Verify the hostname/FQDN resolves before attempting to ping
+   if ! getent hosts "$target" >/dev/null 2>&1; then
+      echo -e "${RED}Error${NC}: '$target' cannot be resolved. Check the hostname or FQDN."
+      exit 1
+   fi
+   label="Host $target"
 else
-   echo -e "${RED}Error${NC}: $ip is not a valid IP address."
+   echo -e "${RED}Error${NC}: '$target' is not a valid IP address, hostname, or FQDN."
    exit 1
 fi
+
+echo -e "Testing $label."
+until [ $up -ne 0 ]; do
+  ping -c 1 $target >/dev/null
+  up=$?
+done
+echo -e "$label is down. \a"; sleep 1; echo -e "\a"
+exit 0
