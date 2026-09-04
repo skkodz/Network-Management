@@ -25,10 +25,10 @@ Script to check and alert on disk space usage, if it goes above a threshold. The
 Basic shell script to report on destination and data quantity from the squid log file. This is assuming that a modified logging format is in place and that you only require data from the previus day. This is aiming to be a daily report that could be scheduled.
 
 ## test-down
-Basic shell script that will notify on screen (and sound the default bell) when a given IP address stops responding to ICMP traffic (ping). Expects a valid IP address as the only mandatory parameter, othrewise throws an error.
+Basic shell script that will notify on screen (and sound the default bell) when a given IP address stops responding to ICMP traffic (ping). Expects a valid IP address, hostname or FQDN as the only mandatory parameter, otherwise throws an error.
 
 ## test-up
-Basic shell script that will notify on screen (and sound the default bell) when a given IP address starts responding to ICMP traffic (ping). Expects a valid IP address as the only mandatory parameter, othrewise throws an error.
+Basic shell script that will notify on screen (and sound the default bell) when a given IP address starts responding to ICMP traffic (ping). Expects a valid IP address, hostname or FQDN as the only mandatory parameter, otherwise throws an error.
 
 test-down and test-up can be used to check that a device reboots. By running in a shell:
 ``` sh
